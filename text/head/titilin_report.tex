@@ -1,0 +1,148 @@
+\documentclass[14pt]{extarticle}
+\usepackage{fontspec}
+\usepackage[russian]{babel}
+\setmainfont{Times New Roman}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{enumitem}
+% \onehalfspacing
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{pdfpages}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{url}
+\usepackage{csquotes}
+% \urlstyle{same}
+\usepackage{longtable}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{titletoc}
+\usepackage{indentfirst}
+% \usepackage[titles]{tocloft}
+\usepackage[
+    backend=biber,
+    sorting=nty,        
+    style=gost-numeric,
+    % sortlocale=ru_RU,  
+    language=auto,
+    autolang=other
+]{biblatex}
+\AtBeginBibliography{\renewcommand*{\mkbibemph}[1]{#1}}
+\DeclareNameAlias{default}{family-given}
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[fieldsource=langid, match=ru, final]
+      \step[fieldset=presort, fieldvalue={a}]
+    }
+    \map{
+      \step[fieldsource=langid, notmatch=ru, final]
+      \step[fieldset=presort, fieldvalue={b}]
+    }
+  }
+}
+
+\setlength{\biblabelsep}{5pt}
+\addbibresource{bibl.bib}
+\titleformat{\section}
+  {\normalfont\fontsize{14}{17.5}\bfseries\centering}{\thesection. }{0em}{}
+\titleformat{\subsection}
+  {\normalfont\fontsize{14}{17.5}\bfseries}{\hspace{1.25cm}\thesubsection. }{0em}{}
+
+% \addto\captionsrussian{\renewcommand{\contentsname}{СОДЕРЖАНИЕ}}
+\setcounter{page}{2} 
+\setlength{\parindent}{1.25cm}
+\usepackage[right=10mm,left=30mm,top=20mm,bottom=20mm]{geometry}
+\setlist[enumerate,1]{
+    label=\arabic*),
+      leftmargin=1.25cm,
+      labelsep=0.3em,
+      itemindent=0pt,
+      labelwidth=0em,
+      align=left,
+      topsep=0pt,
+      itemsep=0pt,
+      parsep=0pt
+}
+\DeclareCaptionLabelSeparator{emdash}{ -- } 
+\DeclareCaptionLabelSeparator{gostdash}{ -- }
+\captionsetup[table]{
+  justification=raggedright,
+  singlelinecheck=false,   
+  labelsep=emdash,        
+  skip=0pt,              
+  % font=normalsize,
+  font={stretch=1.5}
+}
+\addto\captionsrussian{\renewcommand{\figurename}{Рисунок}}
+\captionsetup[figure]{
+    labelsep=gostdash,       % Рисунок 1 — Название
+    justification=centering, % по центру
+    singlelinecheck=false,   % не центрировать однострочные
+    skip=0pt,                % без отступа
+    font={stretch=1.5}
+}
+
+% \setlength{\intextsep}{0pt} % отступы вокруг плавающих объектов
+\setlength{\abovecaptionskip}{0pt} % между рисунком и подписью
+\setlength{\belowcaptionskip}{0pt} % после подписи
+\setlength{\intextsep}{1.5pt} % отступы вокруг плавающих объектов
+% \setlength{\floatsep}{0pt}
+\usepackage{etoolbox}
+\BeforeBeginEnvironment{figure}{\vspace{0.15cm}}
+\AfterEndEnvironment{figure}{\vspace{-0.35cm}}
+\titlespacing*{\section}
+{0pt}{0pt}{0pt}
+\titlespacing*{\subsection}
+{0pt}{0pt}{0pt}
+% \titlespacing*{\contentsname}{0pt}{0pt}{-2em}
+\renewcommand{\baselinestretch}{1.5}
+\usepackage{tocloft}
+\usepackage{setspace}
+\addto\captionsrussian{\renewcommand{\contentsname}{СОДЕРЖАНИЕ}}
+
+\renewcommand{\cfttoctitlefont}{\hspace*{\fill}\fontsize{14}{21}\selectfont\bfseries}
+\renewcommand{\cftaftertoctitle}{\hspace*{\fill}\null}
+
+% Размер шрифта для элементов содержания
+\renewcommand{\cftsecfont}{\fontsize{14}{21}\selectfont\bfseries}
+\renewcommand{\cftsubsecfont}{\fontsize{14}{21}\selectfont}
+\renewcommand{\cftsubsubsecfont}{\fontsize{14}{21}\selectfont}
+\renewcommand{\cftsecpagefont}{\fontsize{14}{21}\selectfont\bfseries}
+\renewcommand{\cftsubsecpagefont}{\fontsize{14}{21}\selectfont}
+\renewcommand{\cftsubsubsecpagefont}{\fontsize{14}{21}\selectfont}
+
+% Межстрочный интервал
+\renewcommand{\cftbeforetoctitleskip}{0pt}
+\renewcommand{\cftaftertoctitleskip}{0pt}  % Убираем отступ
+\setlength{\cftbeforesecskip}{0pt}
+\setlength{\cftbeforesubsecskip}{0pt}
+\setlength{\cftbeforesubsubsecskip}{0pt}
+\setstretch{1.5}
+% \onehalfspacing
+\begin{document}
+\setcounter{page}{2}
+\includepdf{title1.pdf}
+\includepdf[pages=1]{title2.pdf}
+\includepdf[pages=2]{title2.pdf}
+\begin{spacing}{1.5}
+\tableofcontents
+\end{spacing}
+\pagebreak{}
+\input{../text/introduction.tex}
+\pagebreak
+\input{../text/graph.tex}
+\pagebreak{}
+\input{../text/prog.tex}
+\pagebreak
+\input{../text/results.tex}
+\pagebreak
+\input{../text/conclusion.tex}
+\pagebreak
+\printbibliography[title=СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ]
+\addcontentsline{toc}{section}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}
+\end{document}
